@@ -7,7 +7,7 @@ import numpy as np
 electrification_model = joblib.load("electrification_model.pkl")
 project_cost_model = tf.keras.models.load_model("project_cost_model.keras", compile=False)
 
-st.title("Electrification AI + Project Cost Estimator")
+st.title("AI model for Electrification and Project Cost Estimator")
 
 # Dropdown options
 location_options = {
@@ -85,3 +85,4 @@ st.success(
 st.info(
     f"Second Best Suggestion: {second_label} ({second_prob:.2f}%)\nEstimated Cost: ₱{second_project_cost * target_households:,.2f}"
 )
+
