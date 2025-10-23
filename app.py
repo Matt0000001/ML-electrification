@@ -71,8 +71,8 @@ if st.button("Get Suggestions"):
     second_one_hot = [1 if second_label == label else 0 for label in electrification_model.classes_]
 
     # Final input: one-hot + distance + target_households
-    top_cost_input = np.array([top_one_hot + [distance, target_households]])
-    second_cost_input = np.array([second_one_hot + [distance, target_households]])
+    top_cost_input = np.array([top_one_hot + [target_households]])
+    second_cost_input = np.array([second_one_hot + [target_households]])
 
     # Predict project cost for both suggestions
     top_project_cost = project_cost_model.predict(top_cost_input)[0][0]
@@ -85,4 +85,5 @@ st.success(
 st.info(
     f"Second Best Suggestion: {second_label} ({second_prob:.2f}%)\nEstimated Cost: ₱{second_project_cost * target_households:,.2f}"
 )
+
 
