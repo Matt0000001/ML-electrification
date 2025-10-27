@@ -7,7 +7,10 @@ electrification_model = tf.keras.models.load_model("tfelectrification_model_v3.h
 
 # Load individual cost models (no scaling)
 project_cost_models = {
-    "distribution line extension": tf.keras.models.load_model("project_cost_DLE_no_scale_model.keras", compile=False, safe_mode=True),
+    "distribution line extension": tf.keras.models.load_model("project_cost_DLE_no_scale_model.keras", compile=False, safe_mode=True)    
+        except Exception as e:
+            st.error("⚠️ Model loading failed. Please check the model file or logs.")
+            st.stop(),
     "home system": tf.keras.models.load_model("project_cost_home_syste_no_scale_model.keras", compile=False, safe_mode=True),
     "regular connection": tf.keras.models.load_model("project_cost_regular_connection_no_scale_model.keras", compile=False, safe_mode=True)
 }
@@ -91,4 +94,5 @@ if st.button("Get Suggestions"):
         f"Second Best Suggestion: {second_label} ({second_prob * 100:.2f}%)\n"
         f"Estimated Cost: ₱{second_project_cost:,.2f}"
     )
+
 
