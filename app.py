@@ -27,7 +27,7 @@ project_cost_models = {
 
 
 # Streamlit UI
-st.title("Electrification AI + Project Cost Estimator")
+st.title("AI Electrification Solutiuon and Project Cost Estimator")
 
 # Dropdown options
 location_options = ["Rolling", "Flatland", "Coastal", "Upland", "Island"]
@@ -105,6 +105,7 @@ if st.button("Get Suggestions"):
         f"Second Best Suggestion: {second_label} ({second_prob * 100:.2f}%)\n"
         f"Estimated Cost: ₱{second_project_cost:,.2f}"
     )
+
 
 
 
