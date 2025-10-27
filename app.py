@@ -7,12 +7,13 @@ import os
 electrification_model = tf.keras.models.load_model("tfelectrification_model_v3.h5", compile=False)
 
 # Load individual cost models (no scaling)
+
 def safe_load_model(path):
     if not os.path.exists(path):
         st.error(f"❌ Model file not found: {path}")
         return None
     try:
-        return tf.keras.models.load_model(path, compile=False, safe_mode=True)
+        return tf.keras.models.load_model(path, compile=False)
     except Exception as e:
         st.error(f"⚠️ Failed to load model: {path}\n\nError: {e}")
         return None
@@ -22,6 +23,7 @@ project_cost_models = {
     "home system": safe_load_model("project_cost_home_syste_no_scale_model.keras"),
     "regular connection": safe_load_model("project_cost_regular_connection_no_scale_model.keras")
 }
+
 
 
 # Streamlit UI
@@ -103,6 +105,7 @@ if st.button("Get Suggestions"):
         f"Second Best Suggestion: {second_label} ({second_prob * 100:.2f}%)\n"
         f"Estimated Cost: ₱{second_project_cost:,.2f}"
     )
+
 
 
 
