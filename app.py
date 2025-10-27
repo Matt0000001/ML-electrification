@@ -45,12 +45,12 @@ distance = st.number_input("Distance (in km)", min_value=0.0)
 target_households = st.number_input("Target Households", min_value=0)
 
 # Cost computation function
-def compute_cost(label, distance, target_households):
+def compute_cost(label, target_households):
     if label == "microgrid":
         return 0
     model = project_cost_models[label]
     one_hot = [1 if label == sol else 0 for sol in solution_labels]
-    input_features = np.array([one_hot + [distance, target_households]])
+    input_features = np.array([one_hot + [target_households]])
     cost = model.predict(input_features)[0][0]
     return cost
 
@@ -93,8 +93,8 @@ if st.button("Get Suggestions"):
     second_label, second_prob = top_electrification_solutions[1]
 
     # Compute costs
-    top_project_cost = compute_cost(top_label, distance, target_households)
-    second_project_cost = compute_cost(second_label, distance, target_households)
+    top_project_cost = compute_cost(top_label, target_households)
+    second_project_cost = compute_cost(second_label, target_households)
 
     # Display top two suggestions with their estimated costs
     st.success(
@@ -105,6 +105,7 @@ if st.button("Get Suggestions"):
         f"Second Best Suggestion: {second_label} ({second_prob * 100:.2f}%)\n"
         f"Estimated Cost: ₱{second_project_cost:,.2f}"
     )
+
 
 
 
